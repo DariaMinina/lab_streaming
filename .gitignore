@@ -1,1 +1,4 @@
 venv/
+.venv/
+kafka-3.8.0-src.tgz
+kafka-3.8.0-src/
