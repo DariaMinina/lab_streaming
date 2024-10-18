@@ -41,6 +41,7 @@ def myprocessing(message):
 
     message = {
         'action' : info['action'],
+        'id' : data['data']['id'],
         'auth' : info['auth'],
         'geometry_type' : info_geometry['type'],
         'coordinates' : info_geometry['coordinates'],
@@ -56,7 +57,7 @@ def myprocessing(message):
 
     producer = Producer(CONFIG_KAFKA)
 
-    producer.produce(TOPIC, value=json.dumps(message), callback=delivery_report)
+    producer.produce(TOPIC, key=data['data']['id'], value=json.dumps(message), callback=delivery_report)
     producer.flush()
 
 @gen.coroutine
@@ -65,7 +66,7 @@ def listen(ws):
         msg = yield ws.read_message()
         if msg is None:
             logging.info("close")
-            self.ws = None
+            self.ws = None # type: ignore
             break
         myprocessing(msg)
 
