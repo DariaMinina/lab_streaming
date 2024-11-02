@@ -18,6 +18,16 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### Создайте .env файл, в котором будут значения трех переменных
+
+```
+FLINK_SQL_CONNECTOR_KAFKA_JAR=/path/to/flink-sql-connector-kafka-3.3.0-1.20.jar
+FLINK_CONNECTOR_KAFKA_JAR=/path/to/flink-connector-kafka-3.1.0-1.18.jar
+KAFKA_CLIENTS_JAR=/path/to/kafka-clients-3.7.0.jar
+```
+
+В данном примере указаны версии `.jar` файлов, которые используются в программе. Эти файлы нужны для корректной работы библиотеки `pyflink`.
+
 ## Предметная область
 
 Чтение уведомлений почти в режиме реального времени о новых и обновленных событиях землетрясений с помощью протокола WebSocket. Любой клиент WebSocket может подключиться к сервису `wss://www.seismicportal.eu/standing_order/websocket`, чтобы получить уведомление. Пример кода на `Python` предоставлен в файле `test.py`.
