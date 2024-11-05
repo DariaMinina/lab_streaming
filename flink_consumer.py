@@ -1,16 +1,12 @@
 import logging
 import sys
 import os
-from dotenv import load_dotenv
 
 from pyflink.common import Types
 from pyflink.datastream import StreamExecutionEnvironment
+from pyflink.common.configuration import Configuration
 from pyflink.datastream.connectors.kafka import FlinkKafkaProducer, FlinkKafkaConsumer, KafkaSource
 from pyflink.datastream.formats.json import JsonRowSerializationSchema, JsonRowDeserializationSchema
-
-
-# Загружаем переменные окружения из .env файла
-load_dotenv()
 
 
 def read_from_kafka(env):
@@ -39,9 +35,6 @@ if __name__ == '__main__':
 
     env = StreamExecutionEnvironment.get_execution_environment()
 
-    # прописываем пути для нужных jar файлов
-    env.add_jars(f"file://{os.getenv('FLINK_SQL_CONNECTOR_KAFKA_JAR')}")
-    env.add_jars(f"file://{os.getenv('FLINK_CONNECTOR_KAFKA_JAR')}")
-    env.add_jars(f"file://{os.getenv('KAFKA_CLIENTS_JAR')}")
     print("start reading data from kafka")
     read_from_kafka(env)
+
