@@ -1,0 +1,25 @@
+akhq:
+  server:
+    access-log:
+      enabled: true
+      name: org.akhq.log.access
+  ui-options:
+    topic:
+      default-view: ALL
+      skip-consumer-groups: false
+      skip-last-record: true
+      show-all-consumer-groups: true
+    topic-data:
+      sort: NEWEST
+      date-time-format: ISO
+  clients-defaults:
+    consumer:
+      properties:
+        isolation.level: read_committed
+  connections:
+    local:
+      type: kafka
+      properties:
+        bootstrap.servers: "localhost:9092"
+        broker.id: 0
+        group.id: "test-consumer-group"
